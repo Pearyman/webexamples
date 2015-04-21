@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CSS3实现的tab标签</title>
+<link href="css/demo.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<ul id="tabs">
+  <li><a href="#" title="tab1">One</a></li>
+  <li><a href="#" title="tab2">Two</a></li>
+  <li><a href="#" title="tab3">Three</a></li>
+  <li><a href="#" title="tab4">Four</a></li>
+</ul>
+<div id="content">
+  <div id="tab1">
+    <h2>你好</h2>
+    
+  </div>
+  <div id="tab2">
+    <h2>你好吗</h2>
+  </div>
+  <div id="tab3">
+    <h2>你好嘛嘛</h2>
+  </div>
+  <div id="tab4">
+    <h2>你好啊啊啊啊</h2>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#content div").hide(); 
+	$("#tabs li:first").attr("id","current"); 
+	$("#content div:first").fadeIn(); 
+    
+    $('#tabs a').click(function(e) {
+        e.preventDefault();        
+        $("#content div").hide(); 
+        $("#tabs li").attr("id",""); 
+        $(this).parent().attr("id","current"); 
+        $('#' + $(this).attr('title')).fadeIn(); 
+    });
+})();
+</script>
+</body>
+</html>
