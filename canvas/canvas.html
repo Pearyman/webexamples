@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+<style type="text/css">
+	canvas{position: absolute; top: 0; left: 0; background: black;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script type="text/javascript">
+	~(function(){
+		var c=document.getElementById("c");
+		var w=c.width=window.innerWidth,
+		    h=c.height=window.innerHeight,
+		    ctx=c.getContext('2d'),
+		    spawnProb=0.8,
+		    gravitationalInertia=1000,
+		    size=[10,40],
+		    speed=[4,9],
+		    spaenRadius=[Math.min(w,h),Math.max(w,h)],
+		    center={x:w/2,y:h/2},
+		    maxSquareDistFromCenter=500,
+		    frame=(Math.random()*360)|0,
+		    templateColor='#dfd800',
+		    particles=[];
+
+		function rand(prop){
+			return Math.random()*(prop[1]-prop[0]+prop[0]);
+		}
+
+		function Particle(){
+			var radiant=Math.random()*2*Math.PI,
+			    velocity=rand(speed),
+			    radius=rand(spaenRadius);
+
+			  this.x = center.x + Math.cos(radiant + Math.PI/2) * radius;
+			  this.y = center.y + Math.sin(radiant + Math.PI/2) * radius;
+			  
+			  this.initSize = rand(size);
+			  this.squareInitDistance = Math.abs(Math.pow(center.x - this.x, 2) + Math.pow(center.y - this.y, 2));
+			  this.vx = Math.cos(radiant) * velocity;
+			  this.vy = Math.sin(radiant) * velocity;
+			  
+			  this.color = templateColor.replace('hue', frame%360);
+		}
+
+		Particle.prototype.use = function(){
+		  this.x += this.vx -= (this.x - center.x)/gravitationalInertia;
+		  this.y += this.vy -= (this.y - center.y)/gravitationalInertia;
+		  this.vx *= .99;
+		  this.vy *= .99;
+		  
+		  this.squareDistance = Math.abs(Math.pow(center.x - this.x, 2) + Math.pow(center.y - this.y, 2));
+		  this.size = this.initSize * this.squareDistance/this.squareInitDistance;
+		  
+		  ctx.fillStyle = this.color;
+		  ctx.beginPath();
+			ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+		  ctx.fill();
+		}
+
+		function anim(){
+		  window.requestAnimationFrame(anim);
+		  
+		  ++frame;
+		  ctx.fillStyle = 'rgba(0, 0, 0, .04)';
+		  ctx.fillRect(0, 0, w, h);
+
+		  if(Math.random() < spawnProb) particles.push(new Particle);
+		  
+		  for(var i = 0; i < particles.length; ++i){
+		    particles[i].use();
+		    
+		    if(particles[i].squareDistance <= maxSquareDistFromCenter){
+		      particles.splice(i, 1);
+		      --i;
+		    }
+		  }
+		}
+		anim();
+
+
+	})()
+</script>	
+</body>
+</html>
