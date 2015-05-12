@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>swiper</title>
+	<link rel="stylesheet" type="text/css" href="idangerous.swiper.css">
+</head>
+<body>
+<div class="swiper-container">
+   <div class="swiper-wrapper">
+       <!--First Slide-->
+       <div class="swiper-slide tap1"> 
+			1
+       </div>      
+
+      <!--Second Slide-->
+
+      <div class="swiper-slide tap2">
+		2
+       
+
+      </div> 
+
+      <!--Third Slide-->
+
+      <div class="swiper-slide tap3"> 
+		3
+    
+      </div>
+              
+    </div>
+
+</div>
+ <script type="text/javascript">
+ /*======
+ 3 使用文档添加事件或窗口加载事件
+ 4 例如:
+ 5  window.onload = function() { ...代码 ...}
+ 6 或者document.addEventListener('DOMContentLoaded', function(){ ...代码... }, false)
+ 7 =======*/
+ window.onload = function() {
+   var mySwiper = new Swiper('.swiper-container',{
+     //添加需要的选项:
+     mode:'vertical',
+     loop: true 
+     
+   });  
+ }
+ 
+ </script>
+<script type="text/javascript" src="idangerous.swiper.min.js"></script>	
+</body>
+</html>
