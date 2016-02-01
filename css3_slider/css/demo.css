@@ -45,11 +45,14 @@
     -ms-animation: titleAnimation 36s linear infinite 0s;
     animation: titleAnimation 36s linear infinite 0s; 
 }
-.cb-slideshow li div h3 { 
+.cb-slideshow li div h3 a { 
     font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     font-size: 240px;
     padding: 0;
     line-height: 200px; 
+    position: absolute;
+    z-index: 999;
+    bottom:0;
 }
 .cb-slideshow li:nth-child(1) span { 
     background-image: url(http://pic4.zhimg.com/e3f78974cc2b3d74371c863e149d4c37.jpg);
@@ -115,8 +118,6 @@
     -ms-animation-delay: 24s;
     animation-delay: 24s; 
 }
-
-/* Animation for the slideshow images */
 @-webkit-keyframes imageAnimation { 
     0% { opacity: 0;
     -webkit-animation-timing-function: ease-in; }
@@ -162,7 +163,6 @@
     25% { opacity: 0 }
     100% { opacity: 0 }
 }
-/* Animation for the title */
 @-webkit-keyframes titleAnimation { 
     0% { opacity: 0 }
     8% { opacity: 1 }
@@ -198,7 +198,6 @@
     19% { opacity: 0 }
     100% { opacity: 0 }
 }
-/*当animation不支持的时候 直接显示*/
 .no-cssanimations .cb-slideshow li span{
 	opacity: 1;
 }
