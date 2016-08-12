@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>WebSocket Demo</title>
+</head>
+<style type="text/css">
+  textarea{width:400px;height:150px;display:block;overflow-y:scroll;}
+  #output{width:600px;height:400px;background:whiteSmoke;padding:1em .5em;color:#000;border:none;}
+  button{padding:.2em 1em;}
+</style>
+<link href="layout.css" rel="stylesheet" type="text/css" /> 
+<body>
+
+<textarea id="output" readonly="readonly"></textarea>
+<br>
+<textarea id="input"></textarea>
+<button id="send">send</button>
+
+<script type="text/javascript">
+// localhost
+var socket = new WebSocket('ws://127.0.0.1:8888/')
+socket.onopen = function(e) {
+    log(e.type);
+    socket.send('hello node');
+}
+socket.onclose = function(e) {
+    log(e.type);
+}
+socket.onmessage = function(e) {
+    log('receive @ '+ new Date().toLocaleTimeString() +'\n'+e.data);
+  output.scrollTop = output.scrollHeight
+}
+socket.onclose = function(e) {
+    log(e.type);
+}
+socket.addEventListener('close',function() {
+    log('a another close event handler..');
+},false);
+
+// dom
+var id = function(id) {
+    return document.getElementById(id);
+}
+var output = id('output'), input = id('input'), send = id('send');
+var log = function(msg) {
+    output.textContent += '> '+msg + '\n'
+}
+send.addEventListener('click',function() {
+    socket.send(input.value);
+},false);
+
+</script>
+</body>
+</html>

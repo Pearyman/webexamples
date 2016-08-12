@@ -1,0 +1,18 @@
+{"log":"2016-08-12 11:10:14 INFO  c.g.t.tsc.log.LogbackConfigurer - loaded logback configure sucess!\n","stream":"stdout","time":"2016-08-12T03:10:14.642012695Z"}
+{"log":"2016-08-12 11:10:14 INFO  com.cim120.nuwa.service.Main - Nuwa Thrift Server Start......\n","stream":"stdout","time":"2016-08-12T03:10:14.642277476Z"}
+{"log":"Aug 12, 2016 11:10:14 AM org.springframework.context.support.ClassPathXmlApplicationContext prepareRefresh\n","stream":"stderr","time":"2016-08-12T03:10:14.741699562Z"}
+{"log":"INFO: Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4157f54e: startup date [Fri Aug 12 11:10:14 CST 2016]; root of context hierarchy\n","stream":"stderr","time":"2016-08-12T03:10:14.741730557Z"}
+{"log":"Aug 12, 2016 11:10:14 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions\n","stream":"stderr","time":"2016-08-12T03:10:14.782339518Z"}
+{"log":"INFO: Loading XML bean definitions from URL [jar:file:/data/scripts/release/nuwa/20160811-173046/nuwa-service-1.6-SNAPSHOT-test.jar!/config/nuwa/spring/applicationContext.xml]\n","stream":"stderr","time":"2016-08-12T03:10:14.782366198Z"}
+{"log":"Aug 12, 2016 11:10:16 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions\n","stream":"stderr","time":"2016-08-12T03:10:16.382809251Z"}
+{"log":"INFO: Loading XML bean definitions from URL [jar:file:/data/scripts/release/nuwa/20160811-173046/nuwa-service-1.6-SNAPSHOT-test.jar!/config/nuwa/spring/dao.xml]\n","stream":"stderr","time":"2016-08-12T03:10:16.382923288Z"}
+{"log":"Aug 12, 2016 11:10:16 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions\n","stream":"stderr","time":"2016-08-12T03:10:16.713013925Z"}
+{"log":"INFO: Loading XML bean definitions from URL [jar:file:/data/scripts/release/nuwa/20160811-173046/nuwa-service-1.6-SNAPSHOT-test.jar!/config/nuwa/spring/aop.xml]\n","stream":"stderr","time":"2016-08-12T03:10:16.713054954Z"}
+{"log":"Aug 12, 2016 11:10:17 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions\n","stream":"stderr","time":"2016-08-12T03:10:17.035719873Z"}
+{"log":"INFO: Loading XML bean definitions from URL [jar:file:/data/scripts/release/nuwa/20160811-173046/nuwa-service-1.6-SNAPSHOT-test.jar!/config/nuwa/spring/beans.xml]\n","stream":"stderr","time":"2016-08-12T03:10:17.035762663Z"}
+{"log":"Aug 12, 2016 11:10:17 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties\n","stream":"stderr","time":"2016-08-12T03:10:17.266575774Z"}
+{"log":"INFO: Loading properties file from class path resource [config/nuwa/jdbc.properties]\n","stream":"stderr","time":"2016-08-12T03:10:17.266618421Z"}
+{"log":"Aug 12, 2016 11:10:17 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties\n","stream":"stderr","time":"2016-08-12T03:10:17.267434182Z"}
+{"log":"INFO: Loading properties file from class path resource [config/nuwa/config-nuwa-server.properties]\n","stream":"stderr","time":"2016-08-12T03:10:17.267446115Z"}
+{"log":"Aug 12, 2016 11:10:17 AM org.springframework.beans.factory.config.PropertyPlaceholderConfigurer loadProperties\n","stream":"stderr","time":"2016-08-12T03:10:17.268095438Z"}
+{"log":"INFO: Loading properties file from class path resource [config/nuwa/config-yandi-thrift.properties]\n","stream":"stderr","time":"2016-08-12T03:10:17.268126197Z"}
