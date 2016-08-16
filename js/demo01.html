@@ -6,11 +6,16 @@
 <script type="text/javascript">
 	var nodes=document.getElementsByTagName('div');
 
-	for(var i=0; i<nodes.length;i++){
-		(function(i){
-			nodes[i].onclick=function(){
-				alert(this.innerHTML);
-			}
-		})(i);
+	// for(var i=0; i<nodes.length;i++){
+	// 	(function(i){
+	// 		nodes[i].onclick=function(){
+	// 			alert(this.innerHTML);
+	// 		}
+	// 	})(i);
+	// }
+	for(let i=0; i<nodes.length; i++){
+		nodes[i].onclick=function(){
+			alert(this.innerHTML);
+		}
 	}
 </script>
