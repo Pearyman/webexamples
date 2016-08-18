@@ -179,14 +179,31 @@
 	 * 包含start指定的元素，但是不包含end指定的元素
 	 */
 
-	 var a =[1,2,3,4,5];
-	 console.log(a.slice(3));
-	 console.log(a.slice(0,2));
-	 console.log(a.slice(1,-1));
-	 console.log(a.slice(-3,-2));
+	 // var a =[1,2,3,4,5];
+	 // console.log(a.slice(3));
+	 // console.log(a.slice(0,2));
+	 // console.log(a.slice(1,-1));
+	 // console.log(a.slice(-3,-2));
 
 
-	 
+    /*
+	 * array some()
+	 * 测试是否有元素满足断言函数
+	 * 
+	 * 
+	 */
+
+	 var a=[1,2,3];
+	 console.log(a.some(function(x){return x>3}));
+	 console.log([].some(function(x){return false}));
+
+
+
+
+
+
+
+
 
 
 
