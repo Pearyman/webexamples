@@ -45,11 +45,149 @@
 
     /*
 	 * array concat
-	 *
+	 * 链接数组
 	 */
 
 	 // var a=[1,2,3];
 	 // console.log(a.concat(4,[5,[6,7]])); 
+
+
+	 /*
+	 * array every
+	 * 测试断言函数是否每个为真
+	 */
+
+	 // var result=[1,2,3].every(function(x){return x<3;})
+	 // var b=[].every(function(x){return false});
+	 // console.log(b);
+
+
+	 /*
+	 * array filter
+	 * 返回通过断言的数组元素
+	 */
+
+	 // var result=[1,2,3].filter(function(x){return x<=2});
+
+	 // console.log(result);
+
+	 /*
+	 * array forEach(有问题)
+	 * 为每一个数组元素调用一个函数
+	 */
+
+	 // var a=[1,2,3];
+	 // var b=a.forEach(function(x,i,a){a[i]++;});
+	 // console.log(b);
+
+
+
+	 /*
+	 * array indexOf
+	 * 查找数组
+	 */
+
+	 // var a=['a','b','c'];
+	 // console.log(a.indexOf('1'));
+
+
+	 /*
+	 * array join
+	 * 将数组转换成字符串
+	 */
+
+	 // var a=['a','b','c'];
+	 // console.log(a.join('+'));
+
+	 /*
+	 * array lastIndexOf()
+	 * 反向查找数组(和 indexOf()的比较)
+	 */
+
+	 // var a=['a','b','c'];
+	 // console.log(a.lastIndexOf('c',2));
+
+
+
+	 /*
+	 * array map()
+	 * 从数组元素中计算新值
+	 */
+
+	 // var a=[1,2,3];
+	 // var b=a.map(function(x){
+	 // 	return x*x;
+	 // })
+	 // console.log(b);
+
+    /*
+	 * array pop()
+	 * 移除并返回数组的最后一个元素
+	 */
+	 // var a=[];
+	 // console.log(a.pop()); //undefined
+
+
+	/*
+	 * array reduce()
+	 * 从数组中计算出一个值
+	 */
+
+	 // var a=[1,2,3,4];
+	 // var b=a.reduce(function(x,y){
+	 // 	return x*y;
+	 // })
+	 // console.log(b);
+
+
+	 /*
+	 * array reduceRight()
+	 * 从数组中计算出一个值
+	 */
+
+	 // var a=[2,10,60];
+	 // var b=a.reduceRight(function(x,y){
+	 // 	return x/y;
+	 // })
+
+	 // console.log(b);
+
+
+	/*
+	 * array reverse()
+	 * 颠倒数组中的元素顺序
+	 */
+
+	 // var a=[1,2,3];
+	 // console.log(a.reverse());
+
+
+
+	 /*
+	 * array shift()
+	 * 移除数组中的第一个元素
+	 */
+
+	 // var a=[1,2,3];
+	 // console.log(a.shift());
+
+
+	/*
+	 * array slice()
+	 * 返回数组中的一部分
+	 * 一个新数组，包含array中从start一直到end之间的所有元素
+	 * 包含start指定的元素，但是不包含end指定的元素
+	 */
+
+	 var a =[1,2,3,4,5];
+	 console.log(a.slice(3));
+	 console.log(a.slice(0,2));
+	 console.log(a.slice(1,-1));
+	 console.log(a.slice(-3,-2));
+
+
+	 
+
 
 
 
