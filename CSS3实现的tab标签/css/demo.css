@@ -22,7 +22,7 @@ label {
     color: #fff;
     font: normal 1em/150% Sans-Serif;
     margin-right: -3px;
-    transition: background .25s linear;  
+    transition: background .25s linear;
 }
 
 label:hover, input:checked + label {background: #ba2020;}
