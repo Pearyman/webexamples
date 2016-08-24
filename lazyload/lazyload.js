@@ -5,49 +5,18 @@
  * time:2015-5-1
  */
 
- define(function(){
- 		var LL=function(){
+define(function() {
+    var LL = function() {
 
- 		}
+    };
 
- 		LL.prototype={
- 			init:function(){
- 				var self=this;
- 				options:{
+    LL.prototype = {
+        init: function() {
+            var self = this;
+            options: {
 
- 				}
- 			}
- 		}
+            }
+        }
+    };
 
- })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});

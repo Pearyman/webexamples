@@ -4,7 +4,7 @@
 
 var Helloworld = React.createClass({
     render: function() {
-        return (< h1 > hello pearyman < /h1>
+        return (< h1 > hello world < /h1>
     )
   }
 })
