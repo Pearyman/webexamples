@@ -74,16 +74,29 @@ var DropDown=React.createClass({
   }
 })
 */
+// var AddInput=React.createClass({
+//   render:function(){
+//     return {
+//       <button onClick={this.handleClick}>添加</button>
+//     }
+//   },
+//   handleClick:function(){
+//
+//   }
+// });
 
-var AnswerRadioInput=React.createClass({
+var Input=React.createClass({
   render:function(){
     return (
-      <div className="radio">
-        <label>
-          <input type="radio"/> Label Text
-        </label>
-      </div>
-    )
+          <input type="button" value="添加" onClick={this.addHandleClick}/>
+          <input type="button" value="删除" onClick={this.delHandleClick}/>
+    );
+  },
+  handleClick:function(){
+
+  },
+  delHandleClick:function(){
+
   }
-})
-ReactDOM.render(<AnswerRadioInput/>, document.getElementById('example'));
+});
+ReactDOM.render(<Input/>, document.getElementById('example'));

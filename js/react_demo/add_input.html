@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>添加input</title>
+  <!-- react -->
+  <script type="text/javascript" src="http://ac-a5zjlnxg.clouddn.com/d4e10561bf6fd23b.js"></script>
+  <!-- brower -->
+  <script type="text/javascript" src="http://ac-a5zjlnxg.clouddn.com/dde7334a470bfce2.js"></script>
+  <!-- react dom -->
+  <script type="text/javascript" src="http://ac-a5zjlnxg.clouddn.com/26734bf883df1cbd.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+<script type="text/babel">
+  var TMD=React.createClass({
+    getInitialState:function(){
+      return {
+        inputlist:[]
+      }
+    },
+    handleChange:function(rows){
+      this.setState({
+        inputlist:rows
+      })
+    },
+    render:function(){
+      return (
+        <div>
+          <InputButton onAdd={this.handleChange} con={this.state.inputlist}/>
+          <InputList con={this.state.inputlist}/>
+        </div>
+      )
+    }
+  })
+  var InputList=React.createClass({
+    render:function(){
+      return (
+        <ul>
+            {
+              this.props.con.map(function (key, i) {
+                      return (
+                        <div>
+                        输入框: {key}
+                        </div>
+                      );
+                  })
+            }
+        </ul>
+      )
+    }
+  })
+  var InputButton=React.createClass({
+    render:function(){
+      return (
+          <div>
+            <input type="button" value="添加" onClick={this.handleClick}/>
+          </div>
+      );
+    },
+    handleClick:function(){
+      var rows = this.props.con;
+      rows.push(<input type="text"/>);
+      this.props.onAdd(rows);
+    }
+  });
+  ReactDOM.render(<TMD/>, document.getElementById('example'));
+
+</script>
+</body>
+</html>

@@ -16,16 +16,61 @@
 
 <body>
   <div id="example"></div>
-<script type="text/babel" src="helloworld.js"></script>
-<!-- <script type="text/babel">
-var Helloworld = React.createClass({
-    render: function() {
-        return (< h1 > hello world < /h1>
+<!-- <script type="text/babel" src="helloworld.js"></script> -->
+<script type="text/babel">
+var TMD=React.createClass({
+  getInitialState:function(){
+    return {
+      inputlist:[]
+    }
+  },
+  handleChange:function(rows){
+    this.setState({
+      inputlist:rows
+    })
+  },
+  render:function(){
+    return (
+      <div>
+        <InputButton onAdd={this.handleChange} con={this.state.inputlist}/>
+        <InputList con={this.state.inputlist}/>
+      </div>
     )
   }
 })
+var InputList=React.createClass({
+  render:function(){
+    return (
+      <ul>
+          {
+            this.props.con.map(function (key, i) {
+                    return (
+                      <div>
+                      输入框: {key}
+                      </div>
+                    );
+                })
+          }
+      </ul>
+    )
+  }
+})
+var InputButton=React.createClass({
+  render:function(){
+    return (
+        <div>
+          <input type="button" value="添加" onClick={this.handleClick}/>
+        </div>
+    );
+  },
+  handleClick:function(){
+    var rows = this.props.con;
+    rows.push(<input type="text"/>);
+    this.props.onAdd(rows);
+  }
+});
+ReactDOM.render(<TMD/>, document.getElementById('example'));
 
-ReactDOM.render(<Helloworld/ >, document.getElementById('example')); -->
 </script>
 </body>
 
