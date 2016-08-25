@@ -1,7 +1,8 @@
 /**
  * React commentBox test
  */
-
+//
+// 1.1
 // var Helloworld = React.createClass({
 //     render: function() {
 //         return (< h1 > hello pearyman< /h1>
@@ -9,8 +10,11 @@
 //   }
 // })
 //
-//
-//
+
+/*
+ * 1.2
+ */
+/*
 var ListSurvery=React.createClass({
   render:function(){
     var styles={
@@ -28,5 +32,44 @@ var ListSurvery=React.createClass({
     alert(66);
   }
 });
+*/
+//
+// 1.3 这个state有点问题 ，无法完成既定的效果
+//
+var DropDown=React.createClass({
+  getInitialState:function(){
+    return {
+      showOptions:false
+    }
+  },
+  render:function(){
+    var options;
+    var styles={
+      width:300+'px',
+      height:300+'px',
+      backgroundColor:'green'
+    }
+    if(this.state.showOptions){
+      options=(
+        <ul className="options">
+          <li>China</li>
+          <li>Japan</li>
+          <li>Fota</li>
+        </ul>
+      )
+    }
 
-ReactDOM.render(<ListSurvery/>, document.getElementById('example'));
+    return (
+      <div style={styles} onClick={this.handleClick}>
+        <label>choose a city</label>
+      </div>
+    )
+  },
+  handleClick:function(){
+    // alert(6);
+    this.setState({
+      showOptions:true
+    })
+  }
+})
+ReactDOM.render(<DropDown/>, document.getElementById('example'));
