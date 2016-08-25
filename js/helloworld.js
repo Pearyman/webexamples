@@ -36,6 +36,7 @@ var ListSurvery=React.createClass({
 //
 // 1.3 这个state有点问题 ，无法完成既定的效果
 //
+/*
 var DropDown=React.createClass({
   getInitialState:function(){
     return {
@@ -72,4 +73,17 @@ var DropDown=React.createClass({
     })
   }
 })
-ReactDOM.render(<DropDown/>, document.getElementById('example'));
+*/
+
+var AnswerRadioInput=React.createClass({
+  render:function(){
+    return (
+      <div className="radio">
+        <label>
+          <input type="radio"/> Label Text
+        </label>
+      </div>
+    )
+  }
+})
+ReactDOM.render(<AnswerRadioInput/>, document.getElementById('example'));
