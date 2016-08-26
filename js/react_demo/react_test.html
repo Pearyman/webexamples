@@ -13,9 +13,34 @@
   <script type="text/javascript" src="http://ac-a5zjlnxg.clouddn.com/26734bf883df1cbd.js"></script>
 </head>
 <body>
+<div id="example"></div>
 <script type="text/babel">
+/*
+  class Myclass extends React.Component{
+    render(){
+      return <h1>{this.props.name}</h1>;
+    }
+  }
+*/
 
-  
+ class Myclass extends React.Component{
+  render(){
+    React.Children.map(this.props.children,function(child){
+      console.log(child);
+    })
+    return (
+      <div>
+          {this.props.children}
+      </div>
+    )
+  }
+ }
+  ReactDOM.render(
+    <Myclass name="pearyman">
+      <p key="1">lee</p>
+      <p key="2">pearyman</p>
+    </Myclass>,document.getElementById('example'));
+
 </script>
 </body>
 </html>
