@@ -22,7 +22,7 @@
     }
   }
 */
-
+/*
  class Myclass extends React.Component{
   render(){
     React.Children.map(this.props.children,function(child){
@@ -35,9 +35,23 @@
     )
   }
  }
+ */
+
+class Myclass extends React.Component{
+  render(){
+    var cnt=React.Children.count(this.props.children);
+    // alert(cnt);
+    return (
+      <div>
+        {this.props.name}
+      </div>
+    )
+  }
+}
   ReactDOM.render(
     <Myclass name="pearyman">
       <p key="1">lee</p>
+      <p key="2">pearyman</p>
       <p key="2">pearyman</p>
     </Myclass>,document.getElementById('example'));
 
