@@ -7,53 +7,52 @@
   <title>Document</title>
 </head>
 <body>
-  <form data-toggle="formcache" id="form">
-      <input type="text" value="" class="form-control"/>
-      <select class="form-control">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-      <textarea rows="10" class="form-control"></textarea>
-      <a href="http://baidu.com">wedewdew</a>
+  <form class="form-horizontal docs-form" role="form">
+    <input class="form-control" id="text" name="text" type="text" placeholder="text input">
+    <select class="form-control" id="select88" name="select1">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <textarea class="form-control" name="textarea" placeholder="textarea"></textarea>
+    <div class="col-sm-10">
+      <label class="checkbox-inline">
+        <input id="checkbox1" name="checkbox" type="checkbox"> Checkbox 1
+      </label>
+      <label class="checkbox-inline">
+        <input id="checkbox2" name="checkbox" type="checkbox"> Checkbox 2
+      </label>
+      <label class="checkbox-inline">
+        <input id="checkbox3" name="checkbox" type="checkbox"> Checkbox 3
+      </label>
+    </div>
   </form>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="formcache.js"></script>
 <script>
-  ;(function($,window){
-      // $('#form').FormCache();
-      // $(window).on('beforeunload',function(){
-      //   alert(211);
-      // })
-      $(window).on('beforeunload', function(){
-        return '您可能有数据没有保存';
-  });
-      // $('.form-control').on('change',function(){
-      //   var cache = $('#form').formcache('serialize');
-      //   console.log(cache);
-      // })
-      // $('#form').formcache('setCache',['input','213123']);
-      // $('#form').formcache('setCaches', [cache, cache]);
-  })(jQuery,window)
+$(function() {
+    var t = $(".docs-form"),
+        o = $(".docs-panel"),
+        a = {};
+    t.formcache();
+    // $('[data-toggle="tooltip"]').tooltip(),
+    //
+    // o.find("[data-option]").on("change", function() {
+    //     var o = $(this),
+    //         c = o.data("option");
+    //     c && (a[c] = "checkbox" === this.type
+    //         ? this.checked
+    //         : JSON.parse(o.val()), t.formcache("destroy").formcache(a))
+    // })
+    // o.on("click", "[data-method]", function() {
+    //     var o,
+    //         a = $(this).data();
+    //     a.input && (a.option = JSON.parse($(a.input).val())),
+    //     o = t.formcache(a.method, a.option),
+    //     a.output && $(a.output).val(JSON.stringify(o))
+    // })
+});
 
-
-  // $(function(){
-  // var t=$(".docs-form"),
-  // o=$(".docs-panel"),
-  // a={};
-  // t.formcache(),
-  // $('[data-toggle="tooltip"]').tooltip(),
-  // o.find("[data-option]").on("change",function(){
-  //   var o=$(this),
-  //   c=o.data("option");
-  //   c&&(a[c]="checkbox"===this.type?this.checked:JSON.parse(o.val()),t.formcache("destroy").formcache(a))}),
-  //
-  //   o.on("click","[data-method]",function(){
-  //     var o,a=$(this).data();
-  //     a.input&&(a.option=JSON.parse($(a.input).val())),
-  //     o=t.formcache(a.method,a.option),
-  //     a.output&&$(a.output).val(JSON.stringify(o))})});
 </script>
 </body>
 </html>

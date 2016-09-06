@@ -1,102 +1,22 @@
-/**
- * React commentBox test
- */
-//
-// 1.1
-// var Helloworld = React.createClass({
-//     render: function() {
-//         return (< h1 > hello pearyman< /h1>
-//     )
-//   }
-// })
-//
-
-/*
- * 1.2
- */
-/*
-var ListSurvery=React.createClass({
-  render:function(){
-    var styles={
-      width: 100+'px',
-      height:100+'px',
-      backgroundColor:'green',
-      color: '#fff'
-    }
-    return (
-      <div style={styles} onClick={this.handleClick}>hahahaasdsdsd</div>
-    )
-
-  },
-  handleClick:function(){
-    alert(66);
-  }
+$(function() {
+    var t = $(".docs-form"),
+        o = $(".docs-panel"),
+        a = {};
+    t.formcache(),
+    // $('[data-toggle="tooltip"]').tooltip(),
+    //
+    // o.find("[data-option]").on("change", function() {
+    //     var o = $(this),
+    //         c = o.data("option");
+    //     c && (a[c] = "checkbox" === this.type
+    //         ? this.checked
+    //         : JSON.parse(o.val()), t.formcache("destroy").formcache(a))
+    // }),
+    // o.on("click", "[data-method]", function() {
+    //     var o,
+    //         a = $(this).data();
+    //     a.input && (a.option = JSON.parse($(a.input).val())),
+    //     o = t.formcache(a.method, a.option),
+    //     a.output && $(a.output).val(JSON.stringify(o))
+    // })
 });
-*/
-//
-// 1.3 这个state有点问题 ，无法完成既定的效果
-//
-/*
-var DropDown=React.createClass({
-  getInitialState:function(){
-    return {
-      showOptions:false
-    }
-  },
-  render:function(){
-    var options;
-    var styles={
-      width:300+'px',
-      height:300+'px',
-      backgroundColor:'green'
-    }
-    if(this.state.showOptions){
-      options=(
-        <ul className="options">
-          <li>China</li>
-          <li>Japan</li>
-          <li>Fota</li>
-        </ul>
-      )
-    }
-
-    return (
-      <div style={styles} onClick={this.handleClick}>
-        <label>choose a city</label>
-      </div>
-    )
-  },
-  handleClick:function(){
-    // alert(6);
-    this.setState({
-      showOptions:true
-    })
-  }
-})
-*/
-// var AddInput=React.createClass({
-//   render:function(){
-//     return {
-//       <button onClick={this.handleClick}>添加</button>
-//     }
-//   },
-//   handleClick:function(){
-//
-//   }
-// });
-
-var Input=React.createClass({
-  render:function(){
-    return (
-          <input type="button" value="添加" onClick={this.addHandleClick}/>
-          <input type="button" value="删除" onClick={this.delHandleClick}/>
-    );
-  },
-  handleClick:function(){
-
-  },
-  delHandleClick:function(){
-
-  }
-});
-ReactDOM.render(<Input/>, document.getElementById('example'));
