@@ -1,0 +1,9 @@
+{
+  "name": "express_test",
+  "version": "1.0.0",
+  "dependencies": {
+    "ejs": "^0.4.2",
+    "express": "^4.14.0",
+    "superagent": "^0.3.0"
+  }
+}
