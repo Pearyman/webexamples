@@ -1,0 +1,17 @@
+script(src='/javascripts/zepto.js')
+script(src='/javascripts/swiper.min.js')
+script.
+  $(function(){
+      var mySwiper = new Swiper ('.swiper-container', {
+      autoplay: 7000,
+      // effect:'cube',
+      loop:'true',
+      pagination: '.swiper-pagination',
+      paginationClickable :true,
+      autoplayDisableOnInteraction:false
+    })
+  })
+div(style='display:none')
+  script.
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F03077e89a9d8ffe7df6a9e76b8de2aba' type='text/javascript'%3E%3C/script%3E"))
+script(src='/javascripts/app.js')

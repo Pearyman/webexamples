@@ -1,5 +1,29 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html
+  head
+    title= title
+    meta(name='viewport',content='width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no')
+    meta(name='apple-mobile-web-app-capable',content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style',content='black')
+    link(rel='stylesheet', href='/stylesheets/swiper.min.css')
+    link(rel='stylesheet', href='/stylesheets/app.css')
+  body
+  .container
+    include common/header
+    include common/swiper
+    ul.site-list
+      li
+        img(src='images/app.png')
+        .btn-container
+          a(href='app',class='site-btn') 立即下载
+      li
+        img(src='http://fimg.cimyun.com/images/wap/wap-img-recg.png')
+        .btn-container
+          a(href='https://rdp.cim120.cn/',class='site-btn') 立即进入
+      li
+        img(src='images/qiye.png')
+        .btn-container
+          a(href='https://hmp.cim120.cn/',class='site-btn') 立即进入
+    include common/footer
+  include common/sidebar
+  include common/script
