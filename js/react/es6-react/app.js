@@ -2,19 +2,9 @@ import React from 'react';
 
 class App extends React.Component {
     render() {
-        let txt = this.props.txt;
-        return ( < div > < h1 > {
-            txt
-        } < /h1></div > )
+      return <h1> hello </h1>
     }
 }
-App.propTypes = {
-    txt: React.propTypes.string,
-    cat: React.propTypes.number
-}
 
-App.defaultProps = {
-    txt: 'swsq'
-}
 
-export default App;
+module.exports= App;
