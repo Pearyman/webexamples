@@ -4,65 +4,6 @@
 	<meta charset="UTF-8">
 	<title>svg</title>
 	<style type="text/css">
-		/*body{background:#000;}
-		.test{margin:0 auto; position: relative; width: 400px; height: 400px;}
-		.head{border-radius: 50%; overflow:hidden; width: 300px; height: 300px; position: absolute; top:40px; left:50px;  resize:both;}
-		.head>img{object-fit:none; width: 100%; height: 100%;}
-		#svgForStroke1{
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    height: 100%;
-		    stroke-dasharray:112% 1%;
-		    stroke-dashoffset: 0%;
-		    stroke: green;
-			stroke-linecap:round;
-		    fill: none;
-		    -webkit-transform: rotate(90deg)
-		    -moz-transform: rotate(90deg);
-		    -ms-transform: rotate(90deg);
-		    -o-transform: rotate(90deg);
-		    transform: rotate(90deg);
-		    animation:first1 2s linear ;
-			-moz-animation:first1 2s linear ;
-			-webkit-animation:first1 2s 0 linear ;
-			-o-animation:first1 2s 0 linear ;		
-		}
-		#svgForStroke2{
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    height: 100%;
-		    stroke-dasharray:2% 1%;
-		    stroke-dashoffset: 0%;
-		    stroke: #ED6E5C;
-			stroke-linecap:round;
-		    fill: none;
-		    -webkit-transform: rotate(90deg)
-		    -moz-transform: rotate(90deg);
-		    -ms-transform: rotate(90deg);
-		    -o-transform: rotate(90deg);
-		    transform: rotate(90deg);
-		    animation:first1 2s linear ;
-			-moz-animation:first1 2s linear ;
-			-webkit-animation:first1 2s 0 linear ;
-			-o-animation:first1 2s 0 linear ;		
-		}
-		.percent{color: #ED6E5C; font-size: 60px; font-weight: bold; position: absolute; top: 20%; left: 30%;}
-		@keyframes first1
-		{
-		0%   {stroke-dasharray: 140%, 0%; stroke-dashoffset: 70%;}
-		50%  {stroke-dasharray: 50%, 150%; stroke-dashoffset: 0%;}
-		100% {stroke-dasharray: 140%, 50%; stroke-dashoffset: -206%;}
-		}
-		@-webkit-keyframes first1
-		{
-		0%   {stroke-dasharray: 140%, 0%; stroke-dashoffset: 70%;}
-		50%  {stroke-dasharray: 50%, 150%; stroke-dashoffset: 0%;}
-		100% {stroke-dasharray: 140%, 50%; stroke-dashoffset: -206%;}
-		}*/
 		body {
 		  background: #0d8aa5;
 		}
@@ -75,8 +16,10 @@
 		  background: #fff;
 		  width: 100px;
 		  height: 100px;
+			line-height: 100px;
 		  border-radius: 100%;
 		  border: 10px solid #19bee1;
+			text-align: center;
 		}
 		.loading:after {
 		  content: '';
@@ -112,25 +55,13 @@
 	</style>
 </head>
 <body>
-	<!-- <div class="test">
-			<div class="head">
-				<svg id="svgForStroke1" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="50%" cy="50%" r="50%" stroke-width="40"/>
-				</svg>
-				<svg id="svgForStroke2" xmlns="http://www.w3.org/2000/svg">
-					<circle cx="50%" cy="50%" r="40%" stroke-width="20"/>
-				</svg>
-				<p class="percent"><span id="num">01</span>%</p>
-			</div>
-			
-	</div> -->
 	<div class="loading"></div>
 <script type="text/javascript">
 	~(function(){
 		var _num=1;
 		var countDown=setInterval(function(){
 				_num++;
-			document.getElementById("num").innerHTML=_num;
+			document.querySelector(".loading").innerHTML=_num;
 			if(_num===100){
 			 clearInterval(countDown);
 			}
