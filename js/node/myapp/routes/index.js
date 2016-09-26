@@ -7,5 +7,10 @@ router.get('/', function(req, res, next) {
         title: 'cim'
     });
 });
+router.get('/child_care_hot', function(req, res, next) {
+    res.render('child_care_hot', {
+        title: 'cim'
+    });
+});
 
 module.exports = router;
