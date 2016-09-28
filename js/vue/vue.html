@@ -10,7 +10,7 @@
 <body>
 <div id="app" class="static" :class="{'class-a':isA, 'class-b':isB}" :style="{color: 'blue'}">
   <ul class="example">
-    <li v-for="item in items">{{item.msg}}--{{$index+1}}--{{yo}}</li>
+    <li v-for="item in items" track-by="$index">{{item.msg}}--{{$index+1}}--{{yo}}</li>
   </ul>
 </div>
 
