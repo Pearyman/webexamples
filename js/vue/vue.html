@@ -10,8 +10,14 @@
 <body>
 <div id="app" class="static" :class="{'class-a':isA, 'class-b':isB}" :style="{color: 'blue'}">
   <ul class="example">
-    <li v-for="item in items" track-by="$index">{{item.msg}}--{{$index+1}}--{{yo}}</li>
+    <li v-for="item in items" track-by="$index" @click="greet">{{item.msg}}--{{$index+1}}--{{yo}}</li>
   </ul>
+  <span>message is: {{message}}</span>
+  <br/>
+  <input type="text" v-model="message"/>
+
+  <input type="checkbox" id="checkbox" v-model="checked"/>
+  <label for="checkbox">{{checked}}</label>
 </div>
 
 <script>
@@ -36,6 +42,9 @@
     methods:{
       reverseMsg:function(){
         this.msg=this.msg.split('').reverse().join('')
+      },
+      greet:function(event){
+        console.log('hello '+this.yoyo+'!');
       }
     }
   })
