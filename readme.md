@@ -1,5 +1,6 @@
 ### some examples practise
 
 ----------
+- cbFight
 
-## hello
+* [prototype](/cbFight/prototype.md)
