@@ -1,5 +1,5 @@
 ### some examples practise
 
 ----------
-cbFight
-	* [prototype](/cbFight/prototype.md)
+
+* [prototype](/cbFight/prototype.md)
