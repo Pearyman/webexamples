@@ -42,7 +42,7 @@ ie在早期的版本中存在一个Bug,即屏蔽不可枚举属性的实例属�
 
 
 
-### 更简单的原型语法
+### 3 更简单的原型语法
 
 前面的例子中每添加一个属性和方法就要敲一遍Person.prototype。为减少不必要的输入，也为了从视觉上更好的封装原型的功能。更常见的做法是用一个包含所有属性和方法的对象字面量来重写整个原型对象。
 
@@ -140,3 +140,34 @@ console.log(message.startWith('hello'));
 这里通过定义startWith()方法会在传入的文本位于一个字符串开始返回true。既然方法被添加给了String.prototype，那么当前的环境中的所有字符串就都可以调用它。由于message是字符串，而且后台会调用String基本包装函数创建这个字符串，因此message就调用了startWith()方法。
 
 注意：  尽管可以这样做，但我们不推荐在产品化的程序中修改原生对象的原型。如果因某个实现中缺少的方法，就在原生对象的原型中添加这个方法，那么当在另一个支持该方法的实现中运行代码时，就可能会导致命名冲突。而且，这样做也可能会意外的重写方法。
+
+### 6 原型对象的问题
+
+原型模式也不是没有缺点。首先，它省略了为构造函数传递初始化参数这一环节。结果所在实例在默认情况下都将取得相同的属性值。虽然这会在某种程度上带来一些不方便，但还不是原型的最大问题。原型模式的最大问题是由其共享的本性所导致的。
+
+原型中的所有属性是被很多实例共享的，这种共享对于函数非常合适。对于那些包含基本值的属性倒也说得过去，毕竟通过实例上添加一个同名属性，可以隐藏原型中的对应属性。然而，对于包含引用类型值的属性来说，问题就比较突出了。
+
+```
+function Person(){}
+
+Person.prototype={
+  constructor:Person,
+  name:'da',
+  age:11,
+  job:'dssa',
+  friends:['a','b'],
+  sayName:function(){
+    console.log(this.name)
+  }
+}
+
+var person1=new Person();
+var person2=new Person();
+person1.friends.push('lee');
+
+console.log(person1.friends);  // a b lee
+console.log(person2.friends);  // a b lee
+console.log(person1.friends===person2.friends); //true
+
+
+```
