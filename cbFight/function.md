@@ -88,3 +88,80 @@ if(condition){
 
 ```
 这个例子不会有什么意外，不同的函数会根据condition被赋值给sayHi；
+
+```
+function createComparionFunction(propertyName){
+	return function(object1,object2){
+		var value1=object1(propertyName);
+		var value2=object2(propertyName);
+		if(value1<value2){
+			return -1;
+		}else if(value1>value2){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+}
+```
+
+createComparionFunction()就返回了一个匿名函数。返回的函数可能会被赋值给一个变量，或者以其它方式被调用。
+
+不过，在createComparionFunction()函数内部，它是匿名的。在把函数当成值来使用的情况下，都可以使用匿名函数。不过，这并不是匿名函数唯一的用途。
+
+
+
+### 7.1 递归
+
+ 递归函数是在一个函数通过名字调用自身的情况下构成的
+
+ ```
+function factorial(num){
+	if(num<=1){
+		return 1;
+	}else{
+		return num*factorial(num-1);
+	}
+}
+
+ ```
+
+ 这是一个经典的阶乘运算函数。虽然这个函数表面上看没什么问题，但下面的代码却可能导致它出错。
+
+ ```
+var anotherFactorial=factorial;
+factorial=null;
+console.log(anotherFactorial(4))
+ ```
+
+ 以上代码先把factorial()函数保存到变量中，然后将factorial变量设置为null,结果指向原始函数的引用只剩下一个。但是接下来调用anotherFactorial()时候，由于必须执行anotherFactorial，而 factorial这个时候已经不是函数，就会导致错误。这个时候argument.callee可以解决这个问题。
+
+ 我们知道，`arguments.callee是一个指向正在执行函数的指针`。因此可以用它来实现对函数的递归调用。
+
+ ```
+function factorial(num){
+	if(num<=1){
+		return num=1;
+	}else{
+		return num*arguments.callee(num-1);
+	}
+}
+
+ ```
+
+ 加粗的代码显示，通过使用arguments.callee代替函数名，可以确保无论怎样调用函数都不会出问题。因此，在写递归函数时。使用arguments.callee会比使用函数名更保险。
+
+ 但是在严格模式下，不能通过脚本访问arguments.callee，访问这个属性会导致错误。 不过，可以使用命名函数表达式来达成相同的结果。
+
+ ```
+var factorial=(function f(num){
+	if(num<=1){
+		return 1;
+	}else{
+		return num*f(num-1);
+	}
+	})
+
+ ```
+
+ 以上代码创建了一个名为f()的命名函数表达式，然后将它赋值给factorial，即使把函数赋值给另外一个变量， 函数的名字f仍然有效，所以递归调用照样正确的完成。这种方式在严格模式以及非严格模式下都是可以行的通。
