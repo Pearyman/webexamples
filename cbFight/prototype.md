@@ -182,6 +182,39 @@ console.log(person1.friends===person2.friends); //true
 
 
 ```
+function Person(name,age,job){
+  this.name=name;
+  this.age=age;
+  this.job=job;
+  this.friends=['a','b'];
+
+}
+
+Person.prototype={
+  constructor:Person,
+  sayName:function(){
+    console.log(this.name);
+  }
+}
+
+var person1=new Person('da',12,'qdq');
+var person2=new Person('ss',12,'qdq');
+person1.friends.push('lee');
+console.log(person1.friends);  //['a','b','lee']
+console.log(person2.friends);  //['a','b']
+
+```
+
+在这个例子中，实例属性都是在构造函数中定义的，而由所有实例共享的属性constructor和方法sayName()是在原型中定义的。而修改了person1.friends，并不会影响到person2.friends，因为它们引用了不同的数组。
+
+
+### 6.2.5 动态原型模式
+
+有其他的OO语言开发经验的开发人员在看到独立的构造函数和原型时，有可能会感到很困惑。动态原型模式正式致力于解决这个问题的一个方案。
+
+它把所有的信息都封装在构造函数中，而通过在构造函数中初始化原型，又保持了同时使用构造函数和原型的优点。换句话说，可以通过检查某个应该存在的方法是否有效，来决定是否需要初始化原型。
+
+```
 
 
 ```
