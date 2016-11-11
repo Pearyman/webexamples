@@ -165,3 +165,64 @@ var factorial=(function f(num){
  ```
 
  以上代码创建了一个名为f()的命名函数表达式，然后将它赋值给factorial，即使把函数赋值给另外一个变量， 函数的名字f仍然有效，所以递归调用照样正确的完成。这种方式在严格模式以及非严格模式下都是可以行的通。
+
+
+ ### 7.2 闭包
+
+ 有不少开发人员总是搞不清匿名函数和闭包这两个概念，因此经常混用。闭包是指有权访问另一个函数作用域的变量的函数。 创建闭包的常见方式，就是在一个函数内部创建另一个函数，仍以前面的函数为例。
+
+
+ ```
+function createComparionFunction(propertyName){
+	return function(object1, object2){
+		var value1=object1(propertyName);
+		var value2=object2(propertyName);
+		if(value1<value2){
+			return -1;
+		}else if(value1>value2){
+			return 1;
+		}else{
+			return 0;
+		}
+
+	}
+}
+
+ ```
+
+ 在这两个例子中，突出的那两行代码，这两行代码访问了外部的函数变量propertyName。即使这个内部函数被返回了，而且是在其他地方被调用了，但它仍然可以访问变量propertyName。之所以能够访问这个变量，是因为内部函数的作用域链中包含createComparionFunction()的作用域。
+
+ 第四章介绍了作用域链的概念。而有关如何创建作用域链以及作用域链有什么作用的细节，对彻底理解闭包至关重要。当某个函数被调用时，会创建一个执行环境以及相应的作用域链。然后，使用arguments和其他命名参数的值来初始化函数的活动对象。但在作用域链中，外部函数的活动对象始终处于第二位，外部函数的外部函数的活动对象处于第三位，....直至作为作用域链终点的全局执行环境。
+
+ 在函数执行过程中，为读取和写入变量的值，就需要在作用域链中查找变量。
+
+ ```
+function compare(value1,value2){
+	if(value1<value2){
+		return -1;
+	}else if(value1>value2){
+		return 1;
+	}else {
+		return 0;
+	}
+}
+
+var result=compare(5,10);
+ ```
+
+ 定义了一个compare函数，然后又在全局作用域中调用它。当调用compare()时，会创建一个包含arguments、value1、和value2的活动对象。全局执行环境的变量对象（包含result 和 compare） 在compare()执行环境作用域链的处于第二位的。
+
+
+ 后台每个执行环境都有一个表示变量的对象---变量对象。全局环境的变量对象始终存在，而像compare()函数这样的局部环境的变量对象，则只在函数执行的过程中存在。在创建compare()函数时，会创建一个预先包含全局变量对象的作用域链。 这个作用域链被保存在内部的属性中。
+
+ 当调用compare()函数时，会为函数创建一个执行环境，然后通过复制函数的属性中的对象构建起执行环境的作用域链。此后，又有一个活动对象被创建并被推入执行环境作用域链的前端。对于这个例子中compare()函数执行环境而言，其作用域链包含两个变量对象 本地活动对象和全局变量对象。显然，作用域本质上是一个指向变量对象的指针列表，它只引用但不实际包含变量对象。
+
+ 无论什么时候在函数中访问一个变量时，就会从作用域链中搜索具有相应名字的变量。一般来讲，当函数执行完毕后，局部活动对象就会被销毁，内存中仅保存全局作用域。但是闭包的情况又有所不同。
+
+ 在另一个函数内部定义的函数会将外部函数的活动对象添加到它的作用域中。因此，在createComparionFunction()函数内部定义的匿名函数的作用域链中，实际上将会包含外部函数createComparionFunction()的活动对象。
+
+ ```
+var compare=createComparionFunction('name');
+var result= compare({name:'ada'},{name,'adas'});
+
+ ```
