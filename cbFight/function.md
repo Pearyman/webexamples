@@ -285,3 +285,24 @@ function createFunctions(){
 
 
 ### 7.2.2 关于this对象
+
+在闭包中使用this对象也可能会导致一些问题。我们知道，this对象是在运行时基于函数的执行环境绑定的； 在全局函数中，this等于window。而当函数被作为某个对象的方法调用时，this等于那个对象。不过，匿名函数的执行环境具有全局性。因此this对象通常指向window。但有时候由于编写闭包的方式不同，这一点可能不会那么明显。
+
+
+```
+var name='this window';
+
+var object={
+	name:'my object',
+	getNameFunc:function(){
+		return function(){
+			return this.name;
+		}
+	}
+}
+
+console.log(object.getNameFunc()());  // this window
+```
+以上代码创建了一个全局变量name，又创建了一个包含name属性的对象。这个对象还包含一个方法---getNameFunc();它返回一个匿名函数，而匿名函数又返回this.name。由于getNameFunc()返回一个函数，因此调用object.getNameFunc()()就会立即调用它返回的函数。结果就是返回一个字符串。
+
+然而这个例子返回的是 this window，即全局Name变量的值。为什么匿名函数没有取得其包含作用域的this对象呢？
