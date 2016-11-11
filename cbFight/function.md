@@ -226,3 +226,62 @@ var compare=createComparionFunction('name');
 var result= compare({name:'ada'},{name,'adas'});
 
  ```
+在匿名函数从createComparionFunction()中被返回后，它的作用域链被初始化为包含createComparionFunction()函数的活动对象和全局变量对象。
+```
+var compare=createComparionFunction('name');
+var result= compare({name:'ada'},{name,'adas'});
+
+compare=null; //解除对匿名函数的引用，释放内存
+
+```
+首先创建的比较函数被保存在变量compare中。而通过compare设置为等于Null解除该函数的引用，就等于通过垃圾回收将其清除。随着匿名函数的作用域被销毁，其他作用域也都可以完全的销毁了。
+
+
+注意：
+
+由于闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的饿内存。过度使用闭包可能会导致内存占用过多，我们建议读者只是在绝对必要时在考虑使用闭包。虽然V8等优化后的js引擎尝试回收被闭包占用的内存，但还是要慎重的使用闭包。
+
+
+
+
+### 7.2.1闭包与变量
+
+作用域链的这种配置机制引出了一个值得注意的副作用，即闭包只能取得包含函数中任何变量的最后一个值。别忘了闭包所保存的是整个变量对象，而不是某个特殊的变量。
+
+```
+function createFunctions(){
+	var result=new Array();
+	for(var i=0; i<10; i++){
+		result[i]=function(){
+			return i;
+		}
+	}
+	return result;
+}
+
+```
+
+这个函数会返回一个函数数组，表面上看，似乎每个函数都应该返回自己的索引值。即位置0的函数返回0，位置1的函数返回1，以此类推。但实际上，每个函数都返回的是10.因为每个函数的作用域链中都保存着createFunctions的活动对象，所以他们引用的都是同一个变量i, 当createFunctions函数返回后，变量i的值是10，此时每个函数都引用着保存变量i 的同一个变量对象，所以在每个函数内部i的值都是10.但是，我们可以通过创建另一个匿名函数强制让闭包的行为符合预期。
+
+```
+function createFunctions(){
+
+	var result=new Array();
+	for(var i=0; i<10;i++){
+		result[i]=function (num){
+			return function(){
+				return num;
+			}
+		}(i)
+	}
+	return result;
+}
+
+//说实话  我觉得这个的操作性不强 不是很好的例子
+
+```
+
+在重写了前面的createFunctions函数后，每个函数就会返回各自不同的索引值了。在这个版本中，我们没有直接把闭包赋值给数组，而是定义了一个匿名函数，并将立即执行改匿名函数的结果赋值给数组。这里的匿名函数有一个参数num，也就是最终的函数要返回的值。在调用每个匿名函数时，我们传入了变量i。由于函数参数是按值传递的，所以就会将变量i的当前值复制给参数Num.而在这个匿名函数内部，又创建并返回了一个访问Num的闭包。这样一来，result数组中的每个函数都有自己num变量的一个副本，因此就返回来各自不同的值了。
+
+
+### 7.2.2 关于this对象
