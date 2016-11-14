@@ -306,3 +306,55 @@ console.log(object.getNameFunc()());  // this window
 以上代码创建了一个全局变量name，又创建了一个包含name属性的对象。这个对象还包含一个方法---getNameFunc();它返回一个匿名函数，而匿名函数又返回this.name。由于getNameFunc()返回一个函数，因此调用object.getNameFunc()()就会立即调用它返回的函数。结果就是返回一个字符串。
 
 然而这个例子返回的是 this window，即全局Name变量的值。为什么匿名函数没有取得其包含作用域的this对象呢？
+
+前面提到过，每个函数再被调用时都会自动取得两个特殊变量：this和arguments。 内部函数在搜索这两个变量时，只会搜索到其活动变量为止，因此永远不可能直接访问函数中的这两个变量。不过，把外部作用域中的this对象保存在一个闭包能够访问到的变量里，那可以让闭包访问该对象了。
+
+
+```
+var name='the window';
+
+var object={
+	name:'the object',
+	getNameFunc:function(){
+		var that=this;
+		return function(){
+			return that.name;
+		}
+	}
+}
+console.log(object.getNameFunc()());  //the object
+
+```
+
+
+代码中突出展示； 这个例子和上一个例子的不同之处。在定义匿名函数之前，我们把this对象赋值给了一个名叫that的变量。而在定义了闭包之后，闭包也可以访问这个变量。因为它是我们在包含函数中特意声明的一个变量。即使在函数返回之后，that也仍然引用着object，所以调用object.getNameFunc()()就返回了'the object';
+
+this和arguments也存在同样的问题。如果想访问作用域中的arguments对象，必须将对该对象的引用保存到另一个闭包能够访问的变量中。
+
+在几种特殊的情况下，this的值可能会发生意外的改变。比如，下面的diamante是修改前面例子的结果。
+
+```
+var name='the window';
+var object={
+	name:'the object',
+	getName:function(){
+		return this.name;
+	}
+}
+
+```
+这里的getName()方法只简单的返回this.name的值。以下是几种调用object.getName()的方式以及各自的结果。
+
+```
+object.getName(); // the object
+(object.getName)();  //the object
+(object.getName=object.getName)();  //the window
+
+```
+
+第一个代码跟平常的一样调用了object.getName()，返回的是the object,因为thie.name就是object.name。第二行代码在调用这个方法前给它加上了括号。虽然加上括号之后，就好像只是在引用一个函数，但是this的值得到了维持，因为object.getName和（object.getName）的定义是相同的。第三行代码先执行了一个赋值语句，然后在调用赋值后的结果。因为这个赋值表达式的值是函数本身的，所以this得值不能得到维持。结果就返回了the window。
+
+当然，你不大可能会像第二行和第三行代码一样调用这个方法。不过，这个例子有助于说明即使是语法的细微变化，都有可意外的改变this的值。
+
+
+### 7.2.3 内存泄漏
