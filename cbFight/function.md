@@ -566,3 +566,24 @@ console.log(person.getName());
 ### 7.4.1 静态私有变量
 
 通过在私有作用域中定义变量和函数，同样也可以创建特权方法。
+
+```
+(function(
+	var privateVariabl=10;
+	function privateFunction(){
+		return false;
+	}
+	MyObject=function(){
+
+	}
+	MyObject.prototype.publicMethod=function(){
+		privateVariabl++;
+		return privateFunction();
+	}
+	))()
+
+```
+
+这个模式创建了一个私有作用域，并在其中封装了一个构造函数以及相应的方法。在私有作用域中，首先定义了私有变量和私有函数。然后又定义了构造函数以及公有方法。公有方法是在原型上定义的，这一点体现了典型的原型模式。
+
+需要注意的是，这个模式在定义构造函数时并没有使用函数声明，而是使用了函数表达式。函数声明只能创建局部函数，但那并不是我们想要的。 出于同样的原因，我们也没有在声明MyObject时使用var关键字。记住：初始化未经声明的变量，总是会创建一个全局变量。因此，MyObject就成了一个全局变量，能够在私有作用域之外被访问到。但也要知道，在严格模式下给未经声明的变量赋值会导致错误。
