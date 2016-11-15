@@ -587,3 +587,95 @@ console.log(person.getName());
 这个模式创建了一个私有作用域，并在其中封装了一个构造函数以及相应的方法。在私有作用域中，首先定义了私有变量和私有函数。然后又定义了构造函数以及公有方法。公有方法是在原型上定义的，这一点体现了典型的原型模式。
 
 需要注意的是，这个模式在定义构造函数时并没有使用函数声明，而是使用了函数表达式。函数声明只能创建局部函数，但那并不是我们想要的。 出于同样的原因，我们也没有在声明MyObject时使用var关键字。记住：初始化未经声明的变量，总是会创建一个全局变量。因此，MyObject就成了一个全局变量，能够在私有作用域之外被访问到。但也要知道，在严格模式下给未经声明的变量赋值会导致错误。
+
+
+这个模式与在构造函数中定义特权方法的主要区别，就在于私有变量和函数是由实例共享的。由于特权方法是在原型上定义的，因此所有的实例都使用同一个函数。而这个特权方法，作为一个闭包，总是保存着对包含作用域的引用。
+
+```
+(function(){
+	var name='';
+	Person=function(value){
+		name=value;
+	}
+	Person.prototype.getName=function(){
+		return name;
+	}
+
+	Person.prototype.setName=function(value){
+		name=value;
+	}
+	})();
+
+	var person1= new Person('pearyman');
+	console.log(person1.getName());  
+	person1.setName('lee');
+	console.log(person1.getName());
+
+
+	var person2=new Person('michael');
+	console.log(person1.getName());
+	console.log(person2.getName());
+
+```
+
+这个例子中的Person构造函数与getName()和setName()方法一样，都有权访问私有变量name。在这种模式下，变量name就变成了一个静态的、由所有实例共享的属性。也就说，在一个实例上调用setName()会影响所有实例。而调用setName()或新建一个Person实例都会赋予name属性一个新值。结果就是所有实例都会返回相同的值。
+
+以这种方式创建静态私有变量会因为使用原型而增进代码复用，但每个实例都没有自己的私有变量。到底是使用实例变量，还是静态私有变量，最终还是要视你的具体需求而定。
+
+
+### 7.4.2 模块模式
+
+前面的模式是用于为自定义类型创建私有变量和特权方法的。而道格拉斯所说的模块模式则是为单例创建私有变量和特权方法。所谓单例指的就是只有一个单例的对象。按照惯例，js是以对象字面量的方式来创建单例对象的。
+
+```
+var singleton={
+	name: value,
+	method:function(){
+		//这里是方法的代码
+	}
+}
+
+
+```
+
+模块模式通过为单例添加私有变量和特权方法能够使其得到增强。
+
+```
+var sington=function(){
+	var privateVariabl=10;
+	function privateFunction(){
+		return false;
+	}
+
+	return {
+		publicProperty:true,
+		publicMethod:function(){
+			privateVariabl++;
+			return privateFunction();
+		}
+	}
+}()
+
+```
+
+这个模块模式使用了一个返回对象的匿名函数。在这个匿名函数内部，首先定义了私有变量和函数。然后，将一个对象字面量作为函数的值返回。返回的对象字面量中只包含可以公开的属性和方法。由于这个对象是在匿名函数内部定义的，因此它有公有方法有权访问私有变量和函数。从本质上来讲，这个对象字面量定义的是单例的公共接口。这种模式在需要对单例进行某些初始化，同时又需要维护其私有变量时是非常有用的。
+
+```
+var application=function(){
+	var components=new Array();
+	components.push(new BaseComponent());
+
+	return {
+		getComponentCount:function(){
+			return components.length;
+		}，
+		registerComponent:function(component){
+			if(typeof component =='object'){
+				components.push(component);
+			}
+		}
+	}
+}();
+
+```
+在web应用程序中，经常需要使用一个单例来管理应用程序级的信息。这个简单的例子创建了一个用于管理组件application对象。在创建这个对象的过程中，首先声明一个私有的components数组，并向数组中添加了一个BaseComponent的新实例。而返回对象的getComponentCount()和registerComponent()方法，都是有权访问数组components的特权方法。前者只是返回已注册的组件数目。后者用于注册新组件。
