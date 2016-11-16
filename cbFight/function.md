@@ -679,3 +679,31 @@ var application=function(){
 
 ```
 在web应用程序中，经常需要使用一个单例来管理应用程序级的信息。这个简单的例子创建了一个用于管理组件application对象。在创建这个对象的过程中，首先声明一个私有的components数组，并向数组中添加了一个BaseComponent的新实例。而返回对象的getComponentCount()和registerComponent()方法，都是有权访问数组components的特权方法。前者只是返回已注册的组件数目。后者用于注册新组件。
+
+简言之，如果必须创建一个对象并以某些数据对其进行初始化，同时还要公开一些能够访问这些私有数据的方法，那么就可以使用模块模式。以这种模式创建的每个单例都是Object的实例，因为最终要通过一个对象字面量来表示它。事实上，这也没有什么。毕竟，单例通常都是作为全局对象存在的，我们不会将它传递给一个函数，因此，也就没有什么必要使用instanceof 操作符来检查其对象类型了。
+
+### 7.4.3 增强的模块模式
+
+有人进一步改进模块模式，即在返回对象之前加入对其增强的代码。这种增强的模块模式适合那些单例必须是某种类型的实例，同时还必须添加某些属性和方法对其加以增强的情况。
+
+```
+var singleton=function(){
+	var privateVariabl=10;
+
+	function privateFunction(){
+		return false;
+	}
+
+	var object=new CustomType();
+
+	object.publicProperty=true;
+	object.publicMethod=function(){
+		privateVariabl++;
+		return privateFunction();
+	}
+	return object;
+}()
+
+```
+
+如果前面演示模块模式的例子中的application对象必须是BaseComponent的实例，那么就可以使用以下代码。
