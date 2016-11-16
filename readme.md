@@ -4,4 +4,4 @@
 
 * [prototype](/cbFight/prototype.md)
 * [function](/cbFight/function.md)
-* [function](/cbFight/type.md)
+* [type](/cbFight/type.md)
