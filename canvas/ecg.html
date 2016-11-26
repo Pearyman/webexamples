@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>ecg</title>
+</head>
+<body>
+<script>
+window.onload = function () {
+var monitor = document.createElement ( "canvas" );
+
+var canvasWidth = 1200,
+canvasHeight = 600;
+
+monitor.width = canvasWidth;
+monitor.height = canvasHeight;
+
+document.body.appendChild ( monitor );
+
+var ctx = monitor.getContext ( "2d" );
+
+ctx.save ();
+
+ctx.shadowColor = '#555555';
+ctx.shadowBlur = 10;
+ctx.shadowOffsetX = 2;
+ctx.shadowOffsetY = 2;
+
+ctx.beginPath ();
+
+ctx.fillStyle = 'rgba( 255, 211, 171, 1 )';
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'rgba( 20, 50, 20, 1 )';
+ctx.rect ( 0, 0, canvasWidth, canvasHeight );
+ctx.fill ();
+ctx.stroke ();
+
+ctx.closePath ();
+
+ctx.beginPath ();
+
+ctx.arc( 350, 25, 20, 0, 2 * Math.PI, false );
+ctx.fillStyle = 'rgba( 200, 200, 100, 1 )';
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'rgba( 180, 179, 80, 1 )';
+ctx.stroke();
+
+ctx.closePath ();
+
+ctx.beginPath ();
+
+ctx.arc( 350, 85, 20, 0, 2 * Math.PI, false );
+ctx.fillStyle = 'rgba( 200, 200, 100, 1 )';
+ctx.fill();
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'rgba( 180, 179, 80, 1 )';
+ctx.stroke();
+
+ctx.closePath ();
+
+var screenWidth = 1200,
+screenHeight = 600,
+screenTop = 5,
+screenLeft = 5;
+
+function screenBackgroundRender ( a ) {
+
+	ctx.beginPath ();
+
+	ctx.fillStyle = 'rgba( 20, 20, 20, ' + a + ' )';
+	ctx.fillRect ( screenLeft, screenTop, screenWidth, screenHeight );
+
+	ctx.closePath ();
+
+	ctx.beginPath ();
+
+	for ( var j = 10 + screenTop; j < screenTop + screenHeight; j = j + 10 ) {
+		ctx.moveTo( screenLeft, j );
+		ctx.lineTo( screenLeft + screenWidth, j );
+	}
+
+	for ( var i = 10 + screenLeft; i < screenLeft + screenWidth; i = i + 10 ) {
+		ctx.moveTo( i, screenTop );
+		ctx.lineTo( i, screenTop + screenHeight );
+	}
+
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = 'rgba( 20, 50, 20, ' + a + ' )';
+	ctx.stroke ();
+	ctx.closePath ();
+
+}
+
+ctx.shadowBlur = 0;
+ctx.shadowOffsetX = 0;
+ctx.shadowOffsetY = 0;
+screenBackgroundRender ( 1 );
+
+
+//animation
+PosX = screenLeft;
+PosY = screenTop + screenHeight / 2;
+
+setInterval ( function () {
+
+	ctx.restore ();
+
+	screenBackgroundRender ( 0.06 )
+
+	ctx.beginPath ();
+	ctx.moveTo( PosX, PosY );
+	PosX = PosX + 1;
+	if ( PosX >= screenLeft + screenWidth * 40 / 100 && PosX < screenLeft + screenWidth * 45 / 100 ) {
+		PosY = PosY - screenHeight * 3 / 100;
+	}
+	if ( PosX >= screenLeft + screenWidth * 45 / 100 && PosX < screenLeft + screenWidth * 55 / 100 ) {
+		PosY = PosY + screenHeight * 3 / 100;
+	}
+	if ( PosX >= screenLeft + screenWidth * 55 / 100 && PosX < screenLeft + screenWidth * 60 / 100 ) {
+		PosY = PosY - screenHeight * 3 / 100;
+	}
+	if ( PosX >= screenLeft + screenWidth * 60 / 100 && PosX <= screenLeft + screenWidth ) {
+		PosY = screenTop + screenHeight / 2;
+	}
+	if ( PosX > screenLeft + screenWidth ) {
+		PosX = screenLeft;
+		ctx.moveTo( PosX, PosY );
+	}
+	ctx.lineTo( PosX, PosY );
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = '#33ff33';
+	ctx.stroke ();
+	ctx.closePath ();
+
+}, 6 );
+}
+</script>
+</body>
+</html>

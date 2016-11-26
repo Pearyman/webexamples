@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="ecgBc"></canvas>
+<script type="text/javascript">
+function fun(id){
+	return document.getElementById(id);
+}
+var timer=null;
+//var i = -10;
+//var j=1;
+	//画方格
+	function drawGrid(){
+					var c_canvas = document.getElementById("ecgBc");
+					drawSmallGrid(c_canvas);
+					drawMediumGrid(c_canvas);
+					drawBigGrid(c_canvas);
+					return;
+			}
+	function drawSmallGrid(c_canvas){
+			var context = c_canvas.getContext("2d");
+			context.strokeStyle = "#f1dedf";
+			context.strokeWidth=1;
+			context.beginPath();
+			for (var x = 0.5; x < 1500; x += 3) {
+					context.moveTo(x, 0);
+					context.lineTo(x, 1500);
+					context.stroke();
+			}
+			for (var y = 0.5; y < 1500; y += 3) {
+					context.moveTo(0, y);
+					context.lineTo(1500, y);
+					context.stroke();
+			}
+			context.closePath();
+			return;
+	}
+	function drawMediumGrid(c_canvas){
+			var context = c_canvas.getContext("2d");
+			context.strokeStyle = "#f0adaa";
+			context.strokeWidth=1;
+			context.beginPath();
+			for (var x = 0.5; x < 1500; x += 15) {
+					context.moveTo(x, 0);
+					context.lineTo(x, 1500);
+					context.stroke();
+			};
+			for (var y = 0.5; y < 1500; y += 15) {
+					context.moveTo(0, y);
+					context.lineTo(1500, y);
+
+					context.stroke();
+			};
+			context.closePath();
+			return;
+	}
+	function drawBigGrid(c_canvas){
+			var context = c_canvas.getContext("2d");
+			context.strokeStyle = "#e0514b";
+			context.strokeWidth=1;
+			context.beginPath();
+			for (var x = 0.5; x < 1500; x += 75) {
+					context.moveTo(x, 0);
+					context.lineTo(x, 1500);
+					context.stroke();
+			};
+			for (var y = 0.5; y < 1500; y += 75) {
+					context.moveTo(0, y);
+					context.lineTo(1500, y);
+					context.stroke();
+			};
+			context.closePath();
+			return;
+	}
+	drawGrid();
+
+	//画曲线
+			// $.ajax({
+			// 		url : "../data/test.json",
+			// 		success : function(data) {
+			// 				fillDatas(data.wave_data);
+			// 				//fillDatasMiro(data.wave_data);
+			// 		}
+			// });
+			//
+			//
+			//
+			//
+			fillDatas([0.3,0.5,1,1.5,2,2.2]);
+	function fillDatas(short_array) {
+			var canvasline = document.getElementById("ecgBc");
+		 var linectx = canvasline.getContext("2d");
+			var totalPointCount = short_array.length;
+					var pointX = 0;
+					var pointY = 0;
+					 linectx.beginPath();
+			//setInterval(function () {
+			//    linectx.clearRect(0,0,1500,1000);
+			//    linectx.save();
+			//    i--;
+					linectx.scale(1,0.5);
+					linectx.translate(0,750);
+					for (var point_index = 0; point_index < totalPointCount; ++point_index) {
+							// i--;
+							//setTimeout(linectx.translate(i,750),2000);
+							pointX +=point_index/10;
+							pointY = short_array[point_index];
+							linectx.lineTo(pointX,pointY);
+					}
+					linectx.stroke();
+					//linectx.restore();
+			//},2000);
+			return;
+	}
+//var canvasline = document.getElementById("ecg");
+//var linectx = canvasline.getContext("2d");
+//setInterval(function () {
+//    linectx.clearRect(0,0,1500,1000);
+//    linectx.save();
+//    j++;
+//    linectx.translate(j,0);
+//    dra();
+//    linectx.restore();
+//},50);
+//function dra(){
+//    linectx.fillRect(0,0,100,100);
+//}
+
+
+
+	//function fillDatasMiro(short_array) {
+	//    var canvasline = document.getElementById("ecgMiro");
+	//    var linectx = canvasline.getContext("2d");
+	//    var totalPointCount = short_array.length;
+	//    var pointX = 0;
+	//    var pointY = 0;
+	//    linectx.beginPath();
+	//    linectx.scale(1,0.5);
+	//    linectx.translate(0,1500);
+	//    for (var point_index = 0; point_index < totalPointCount; ++point_index) {
+	//        pointX +=point_index/10*2;
+	//        pointY = short_array[point_index]*2;
+	//        linectx.lineTo(pointX,pointY);
+	//    }
+	//    linectx.stroke();
+	//    linectx.closePath();
+	//    return;
+	//};
+
+
+//fun('ecgLine').onmousemove=function (e){
+//        //放大镜特效
+//        //alert(1);
+//        var e=e||event;
+//        fun('moro').style.display="block";
+//        fun('moro').scrollLeft= e.offsetX*2-180;
+//        fun('moro').scrollTop= e.offsetY*2-130;
+//            //跟随特效
+//        fun('moro').style.left= e.pageX+20+'px';
+//        fun('moro').style.top= e.pageY+20+'px';
+//        };
+//    fun('ecgLine').onmouseout=function () {
+//        fun('moro').style.display="none";
+//        };
+</script>
+</body>
+</html>

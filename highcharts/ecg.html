@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>ecg</title>
+</head>
+<body>
+	<div id="container" style="min-width:400px;height:400px"></div>
+<script src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(function () {
+	$(document).ready(function () {
+			Highcharts.setOptions({
+					global: {
+							useUTC: false
+					}
+			});
+			$('#container').highcharts({
+					chart: {
+							type: 'spline',
+							animation: false, // don't animate in old IE
+							marginRight: 10,
+							backgroundColor:'#000',
+							events: {
+									// load: function () {
+									// 		// set up the updating of the chart each second
+									// 		var series = this.series[0];
+									// 		setInterval(function () {
+									// 				var x = (new Date()).getTime(), // current time
+									// 						y = Math.random();
+									// 				series.addPoint([x, y], true, true);
+									// 		}, 250);
+									// }
+							}
+					},
+					title: {
+							text: 'Live random data'
+					},
+					xAxis: {
+						minorGridLineDashStyle: 'solid',
+						minorGridLineColor:'#222',
+				 		minorTickInterval: 'auto',
+				 		minorTickWidth: 0,
+						labels: {
+							style: {
+									color: 'red'
+							}
+						},
+							type: 'linear',
+							gridLineWidth:1,
+							gridLineColor:'gray'
+							// tickPixelInterval: 1
+					},
+					yAxis: {
+						minorGridLineDashStyle: 'solid',
+				 		minorTickInterval: 'auto',
+						minorGridLineColor:'#222',
+				 		minorTickWidth: 0,
+						gridLineColor:'gray',
+							title: {
+									text: 'Value'
+							},
+							gridLineWidth:1
+					},
+					tooltip: {
+							formatter: function () {
+
+							}
+					},
+					credits:{
+						enabled:false
+					},
+					legend: {
+							enabled: false
+					},
+					exporting: {
+							enabled: false
+					},
+					colors:['green'],
+					plotOptions:{
+						spline:{
+							lineWidth:1
+						}
+					},
+					series: [{
+							name: 'Random data',
+							data: (function () {
+									// generate an array of random data
+									var data = [],
+											time = (new Date()).getTime(),
+											i;
+									for (i = 0; i <= 640; i ++) {
+											data.push({
+													x: 7.8125*i,
+													y: Math.random()
+											});
+									}
+									return data;
+							}())
+					}]
+			});
+	});
+});
+
+</script>
+</body>
+</html>
