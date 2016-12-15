@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+         <head>
+                   <metacharsetmetacharset="UTF-8" content="">
+                   <title>linegrid</title>
+                   <style>
+
+                   .gridline {
+                     stroke: #000;
+                   }
+
+                   </style>
+
+         </head>
+
+ </head>
+ <body>
+	<script type="text/javascript" src="./dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./dist/jke-d3-ecg.min.js"></script>
+   <script type="text/javascript">
+
+			var data = d3.range(10);// (1) 生成一个10元素的数组
+
+			var w = 960,
+			    h= 500,
+			    p= 40,//内边距
+			    x= d3.scale.linear().domain([0, 1]).range([p, w - p]), //(2) 定义x和y比例尺
+			    y= d3.scale.linear().domain([0, 1]).range([h - p, p]);
+
+			//(3) 绘制SVG
+			var svg = d3.select("body").append("svg")
+			   .attr("width", w)
+			   .attr("height", h);
+
+			//(4) 给SVG添加分组，并设置样式类，样式见<style>标签中的设置
+			var grid = svg.selectAll(".grid")
+			   .data(x.ticks(10))
+			 .enter().append("g")
+			   .attr("class", "grid");
+			//(5) 添加线条，设置起始坐标(x1,y1)和结束坐标(x2,y2)的值即可
+			//竖线
+			grid.append("line")
+			   .attr("x1", x)
+			   .attr("x2", x)
+			   .attr("y1", p)
+			   .attr("y2", h - p - 1);
+
+			//横线
+			grid.append("line")
+			   .attr("y1", y)
+			   .attr("y2", y)
+			   .attr("x1", p)
+			   .attr("x2", w - p + 1);
+
+   </script>
+  </body>
+</html>
